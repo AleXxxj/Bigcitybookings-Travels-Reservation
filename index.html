@@ -16,7 +16,7 @@
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="BigCity Bookings – Travel Smart">
     <meta property="og:description" content="Any airline. Any destination. We handle everything. You just travel.">
-    <meta property="og:image" content="images/Bigcitybookings.PNG">
+    <meta property="og:image" content="https://bigcitybookings.com/og-image.jpg">
     <meta property="og:url" content="https://bigcitybookings.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BigCity Bookings">
@@ -38,12 +38,14 @@
         "@context": "https://schema.org",
         "@type": "TravelAgency",
         "name": "BigCity Bookings",
-        "image": "images/bigcitybookingslogo.PNG",
+        "image": "https://bigcitybookings.com/logo.png",
         "url": "https://bigcitybookings.com",
         "telephone": "+2349083204141",
         "email": "info@bigcitybookings.com",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Plot C85, amuwo odofin, industrial estate",
+            "addressLocality": "Lagos",
             "addressCountry": "NG"
         },
         "openingHours": "Mo-Su 08:00-20:00",
@@ -67,6 +69,48 @@
             line-height: 1.6;
             color: #1a1a2e;
             background: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme */
+        body.dark {
+            background: #1a1a2e;
+            color: #f0f0f0;
+        }
+
+        body.dark .service-card,
+        body.dark .testimonial-card,
+        body.dark .blog-card,
+        body.dark .form-section,
+        body.dark .faq-item,
+        body.dark .faq-question,
+        body.dark [style*="background: white"],
+        body.dark > section > .container > div[style*="background: white"] {
+            background: #2d2d44 !important;
+            color: #f0f0f0 !important;
+        }
+
+        body.dark .service-card p,
+        body.dark .testimonial-text,
+        body.dark .blog-card p,
+        body.dark .faq-answer {
+            color: #ccc !important;
+        }
+
+        body.dark header {
+            background: #2d2d44;
+        }
+
+        body.dark .nav-links a {
+            color: #f0f0f0;
+        }
+
+        body.dark .form-group input,
+        body.dark .form-group select,
+        body.dark .form-group textarea {
+            background: #1a1a2e;
+            border-color: #444;
+            color: #f0f0f0;
         }
 
         /* Smooth scroll */
@@ -88,6 +132,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: background-color 0.3s;
         }
 
         nav {
@@ -104,20 +149,42 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
+            gap: 0.75rem;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            font-size: 2rem;
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1e3c72;
+            line-height: 1.2;
+        }
+
+        .logo-subtext {
+            font-size: 0.7rem;
+            color: #e67e22;
+            letter-spacing: 1px;
+        }
+
+        body.dark .logo-text {
+            color: #f0f0f0;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .nav-links a {
@@ -125,10 +192,47 @@
             color: #1a1a2e;
             font-weight: 500;
             transition: color 0.3s;
+            padding: 8px 16px;
+            border-radius: 25px;
         }
 
         .nav-links a:hover {
             color: #e67e22;
+            background: rgba(230,126,34,0.1);
+        }
+
+        .nav-btn {
+            background: #e67e22;
+            color: white !important;
+        }
+
+        .nav-btn:hover {
+            background: #d35400 !important;
+            color: white !important;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0,0,0,0.1);
+        }
+
+        body.dark .theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         /* Buttons */
@@ -167,11 +271,14 @@
             color: white;
         }
 
-        /* Hero Section */
+        /* Hero Section with Background Image */
         .hero {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/Bigcitybookings.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: white;
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
         }
 
@@ -183,7 +290,7 @@
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .hero-badges {
@@ -213,10 +320,18 @@
             color: #1e3c72;
         }
 
+        body.dark .section-title {
+            color: #e67e22;
+        }
+
         .section-subtitle {
             text-align: center;
             color: #666;
             margin-bottom: 3rem;
+        }
+
+        body.dark .section-subtitle {
+            color: #aaa;
         }
 
         /* Services Grid */
@@ -250,6 +365,10 @@
             color: #1e3c72;
         }
 
+        body.dark .service-card h3 {
+            color: #e67e22;
+        }
+
         .service-card p {
             color: #666;
         }
@@ -273,6 +392,10 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: #1e3c72;
+        }
+
+        body.dark .form-group label {
+            color: #e67e22;
         }
 
         .form-group input,
@@ -323,8 +446,16 @@
             border-bottom: 1px solid #eee;
         }
 
+        body.dark .faq-question {
+            border-bottom-color: #444;
+        }
+
         .faq-question:hover {
             background: #f8f9fa;
+        }
+
+        body.dark .faq-question:hover {
+            background: #3d3d5c;
         }
 
         .faq-answer {
@@ -369,9 +500,17 @@
             font-size: 1.25rem;
         }
 
+        body.dark .blog-card h3 {
+            color: #e67e22;
+        }
+
         .blog-card p {
             color: #666;
             margin-bottom: 1rem;
+        }
+
+        body.dark .blog-card p {
+            color: #ccc;
         }
 
         .read-more {
@@ -410,6 +549,10 @@
         .testimonial-name {
             font-weight: bold;
             color: #1e3c72;
+        }
+
+        body.dark .testimonial-name {
+            color: #e67e22;
         }
 
         /* Map Section */
@@ -486,6 +629,13 @@
             transform: scale(1.1);
         }
 
+        .office-address {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav {
@@ -512,6 +662,14 @@
             .form-section {
                 padding: 1.5rem;
             }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -525,18 +683,22 @@
 
 <header>
     <nav>
-        <div class="logo">
-            <span class="logo-icon">✈️</span>
-            <span>BIGCITY BOOKINGS</span>
-        </div>
+        <a href="#home" class="logo">
+            <img src="images/bigcitybookingslogo.PNG" alt="BigCity Bookings Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text-container">
+                <span class="logo-text">BIGCITY BOOKINGS</span>
+                <span class="logo-subtext">Travels and Reservations</span>
+            </div>
+        </a>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
             <a href="#booking">Book Now</a>
             <a href="#blog">Travel Tips</a>
             <a href="#contact">Contact</a>
+            <a href="#booking" class="nav-btn">Request Quote</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
         </div>
-        <a href="#booking" class="btn btn-primary">Request Quote</a>
     </nav>
 </header>
 
@@ -562,6 +724,9 @@
             <p class="section-subtitle">We make every journey smooth, affordable, and memorable.</p>
             <div style="max-width: 800px; margin: 0 auto; text-align: center; background: white; padding: 2rem; border-radius: 20px;">
                 <p style="font-size: 1.1rem;">BigCity Bookings is your trusted travel partner in Nigeria. From flights to hotels, we've got you covered. With real human support and the best deals available, we ensure your travel experience is nothing short of exceptional.</p>
+                <div class="office-address" style="background: #f0f2f5; margin-top: 1.5rem; padding: 1rem; border-radius: 10px;">
+                    <p style="margin: 0;">📍 <strong>Office Address:</strong> Plot C85, amuwo odofin, industrial estate, Lagos</p>
+                </div>
             </div>
         </div>
     </section>
@@ -819,7 +984,7 @@
                     loading="lazy">
                 </iframe>
             </div>
-            <p style="text-align: center; margin-top: 1rem;">📍 Serving clients across Nigeria and worldwide</p>
+            <p style="text-align: center; margin-top: 1rem;">📍 Plot C85, amuwo odofin, industrial estate, Lagos</p>
         </div>
     </section>
 </main>
@@ -829,6 +994,7 @@
         <div class="footer-content">
             <div class="footer-info">
                 <h3>BIGCITY BOOKINGS</h3>
+                <p>Travels and Reservations</p>
                 <p>Travel Smart. Worry Less.</p>
                 <p>Any airline. Any destination. We handle everything.</p>
             </div>
@@ -837,6 +1003,7 @@
                 <p>📞 <a href="tel:+2349083204141" style="color: white; text-decoration: none;">+234 908 320 4141</a></p>
                 <p>📱 <a href="tel:+2349029275146" style="color: white; text-decoration: none;">+234 902 927 5146</a></p>
                 <p>📧 <a href="mailto:info@bigcitybookings.com" style="color: white; text-decoration: none;">info@bigcitybookings.com</a></p>
+                <p>📍 Plot C85, amuwo odofin, industrial estate, Lagos</p>
                 <div class="social-links">
                     <a href="https://instagram.com/bigcitybookings.travel" target="_blank">📷</a>
                     <a href="#" target="_blank">📘</a>
@@ -896,6 +1063,28 @@
             form.reset();
         });
     }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark');
+        themeToggle.textContent = '☀️';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        if (body.classList.contains('dark')) {
+            themeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        }
+    });
 </script>
 
 </body>
