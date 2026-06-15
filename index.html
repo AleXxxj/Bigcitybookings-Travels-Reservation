@@ -6,7 +6,7 @@
 <title>BigCity Bookings | Travel Smart</title>
 <meta name="description" content="BigCity Bookings — Premium flight & hotel reservations in Nigeria. Any airline. Any destination. Real human support.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -104,11 +104,8 @@ body.light .blog-card:hover { background: var(--bg-light); }
 body.light .blog-card h3 { color: var(--navy); }
 body.light .blog-card p { color: var(--fg-muted); }
 body.light .blog-grid { background: rgba(201,168,76,0.25); border-color: rgba(201,168,76,0.25); }
-body.light .blog-card.featured {
-  background: linear-gradient(to top, rgba(10,15,44,0.88) 0%, rgba(10,15,44,0.35) 100%),
-    linear-gradient(135deg, #1a2548, #0d1730);
-}
-body.light .blog-card.featured h3 { color: white; }
+body.light .blog-card { background: transparent; }
+body.light .blog-card:hover { background: transparent; }
 
 body.light .office-section { background: var(--bg-mid); }
 body.light .office-hours { border-color: rgba(201,168,76,0.35); }
@@ -343,13 +340,15 @@ nav a:hover { color: var(--gold); }
 }
 
 .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(3.5rem, 7vw, 6rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.05;
   margin-bottom: 1.5rem;
   opacity: 0;
   animation: fade-up 0.8s 0.4s ease forwards;
+  color: #ffffff;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.6), 0 0 60px rgba(0,0,0,0.4);
 }
 
 .hero h1 em {
@@ -360,11 +359,12 @@ nav a:hover { color: var(--gold); }
 .hero-desc {
   font-size: 1.05rem;
   line-height: 1.8;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.9);
   margin-bottom: 3rem;
-  font-weight: 300;
+  font-weight: 400;
   opacity: 0;
   animation: fade-up 0.8s 0.6s ease forwards;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
 }
 
 .hero-actions {
@@ -953,7 +953,55 @@ section {
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
+
+/* Blog card image backgrounds */
+.blog-card .blog-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+  z-index: 0;
+}
+
+.blog-card:hover .blog-img {
+  transform: scale(1.06);
+}
+
+/* Dark overlay over image */
+.blog-card .blog-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,15,44,0.95) 0%, rgba(10,15,44,0.5) 60%, rgba(10,15,44,0.25) 100%);
+  z-index: 1;
+  transition: background 0.4s;
+}
+
+body.light .blog-card .blog-overlay {
+  background: linear-gradient(to top, rgba(10,15,44,0.92) 0%, rgba(10,15,44,0.55) 60%, rgba(10,15,44,0.3) 100%);
+}
+
+.blog-card:hover .blog-overlay {
+  background: linear-gradient(to top, rgba(10,15,44,0.98) 0%, rgba(10,15,44,0.65) 60%, rgba(10,15,44,0.35) 100%);
+}
+
+/* Make all blog card text sit above overlay */
+.blog-tag,
+.blog-card h3,
+.blog-card p,
+.blog-link {
+  position: relative;
+  z-index: 2;
+}
+
+/* Override text colors — always white on image bg */
+.blog-card h3 { color: #ffffff !important; }
+.blog-card p { color: rgba(255,255,255,0.75) !important; }
 
 .blog-card::after {
   content: '';
@@ -973,9 +1021,6 @@ section {
   flex-direction: column;
   justify-content: flex-end;
   min-height: 400px;
-  background:
-    linear-gradient(to top, rgba(10,15,44,0.95) 0%, rgba(10,15,44,0.4) 100%),
-    linear-gradient(135deg, #1a2548, #0d1730);
 }
 
 .blog-tag {
@@ -1245,6 +1290,100 @@ section {
   .footer-top { grid-template-columns: 1fr; }
   .mobile-nav { display: flex; }
 }
+
+/* ── MOBILE NAV ── */
+.hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,15,44,0.98);
+  backdrop-filter: blur(20px);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+body.light .mobile-menu { background: rgba(245,240,232,0.98); }
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.3s;
+  letter-spacing: 0.05em;
+}
+
+.mobile-menu a:hover { color: var(--gold); }
+
+.mobile-menu-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-theme-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  nav > a, nav > button.theme-toggle { display: none; }
+  nav { gap: 1rem; }
+}
 </style>
 </head>
 <body>
@@ -1268,8 +1407,25 @@ section {
     <a href="#contact">Contact</a>
     <a href="#booking" class="nav-cta">Request Quote</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileClose">✕</button>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#booking" class="mobile-link">Book Now</a>
+  <a href="#blog" class="mobile-link">Travel Tips</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#booking" class="btn-gold mobile-link" style="font-size:1rem; padding:0.9rem 2.5rem;">Request Quote</a>
+  <div class="mobile-theme-row">
+    <span id="mobileThemeLabel">Dark Mode</span>
+    <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">🌙</button>
+  </div>
+</div>
 
 <!-- Hero -->
 <section id="home" class="hero">
@@ -1592,30 +1748,40 @@ section {
   </div>
   <div class="blog-grid">
     <div class="blog-card featured reveal">
+      <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop');"></div>
+      <div class="blog-overlay"></div>
       <div class="blog-tag">Featured</div>
       <h3>Economy vs Business Class: What's Actually Worth It?</h3>
       <p>Is the extra cost worth the comfort? We break down the real differences based on trip length, budget, and what airlines won't tell you.</p>
       <a href="#" class="blog-link">Read Article →</a>
     </div>
     <div class="blog-card reveal reveal-delay-1">
+      <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1611095561741-51749f33f51b?w=600&auto=format&fit=crop');"></div>
+      <div class="blog-overlay"></div>
       <div class="blog-tag">Pricing</div>
       <h3>Why Last-Minute Flights Cost More</h3>
       <p>Airline pricing secrets revealed — learn when to book and save up to 40%.</p>
       <a href="#" class="blog-link">Read →</a>
     </div>
     <div class="blog-card reveal reveal-delay-2">
+      <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=600&auto=format&fit=crop');"></div>
+      <div class="blog-overlay"></div>
       <div class="blog-tag">Beginners</div>
       <h3>5 Mistakes First-Time Travelers Make</h3>
       <p>Visa issues, wrong luggage, missed connections — avoid these pitfalls.</p>
       <a href="#" class="blog-link">Read →</a>
     </div>
     <div class="blog-card reveal reveal-delay-1">
+      <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?w=600&auto=format&fit=crop');"></div>
+      <div class="blog-overlay"></div>
       <div class="blog-tag">Nigeria</div>
       <h3>Cheaper Domestic Flights in Nigeria</h3>
       <p>Insider tips for Lagos–Abuja, Lagos–Kano, and other popular routes.</p>
       <a href="#" class="blog-link">Read →</a>
     </div>
     <div class="blog-card reveal reveal-delay-2">
+      <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?w=600&auto=format&fit=crop');"></div>
+      <div class="blog-overlay"></div>
       <div class="blog-tag">Emergency</div>
       <h3>What to Do When You Must Fly Tomorrow</h3>
       <p>Don't panic. Here's exactly how to handle last-minute emergency travel.</p>
@@ -1713,6 +1879,11 @@ function setTheme(mode) {
     themeToggle.title = 'Switch to light mode';
   }
   localStorage.setItem('bcb-theme', mode);
+  // Keep mobile toggle in sync
+  const mob = document.getElementById('themeToggleMobile');
+  const lbl = document.getElementById('mobileThemeLabel');
+  if (mob) mob.textContent = mode === 'light' ? '☀️' : '🌙';
+  if (lbl) lbl.textContent = mode === 'light' ? 'Light Mode' : 'Dark Mode';
 }
 
 // Load saved preference
@@ -1724,7 +1895,52 @@ themeToggle.addEventListener('click', () => {
   setTheme(isLight ? 'dark' : 'light');
 });
 
-// Scroll reveal
+// Hamburger mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+const mobileLinks = document.querySelectorAll('.mobile-link');
+
+function openMenu() {
+  mobileMenu.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  mobileMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (hamburger) hamburger.addEventListener('click', openMenu);
+if (mobileClose) mobileClose.addEventListener('click', closeMenu);
+mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+// Mobile theme toggle mirrors main toggle
+const themeToggleMobile = document.getElementById('themeToggleMobile');
+const mobileThemeLabel = document.getElementById('mobileThemeLabel');
+
+function syncMobileTheme(mode) {
+  if (themeToggleMobile) {
+    themeToggleMobile.textContent = mode === 'light' ? '☀️' : '🌙';
+  }
+  if (mobileThemeLabel) {
+    mobileThemeLabel.textContent = mode === 'light' ? 'Light Mode' : 'Dark Mode';
+  }
+}
+
+if (themeToggleMobile) {
+  themeToggleMobile.addEventListener('click', () => {
+    const isLight = body.classList.contains('light');
+    const newMode = isLight ? 'dark' : 'light';
+    setTheme(newMode);
+    syncMobileTheme(newMode);
+  });
+}
+
+// Sync on load
+syncMobileTheme(savedTheme);
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1751,24 +1967,51 @@ document.querySelectorAll('.faq-question').forEach(q => {
   });
 });
 
-// Form submission
+// Form submission — direct WhatsApp send, no alert
 const form = document.getElementById('bookingForm');
 if (form) {
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(form);
-    let message = 'New Booking Request:%0A';
-    for (let [key, value] of formData.entries()) {
-      message += `${key}: ${value}%0A`;
-    }
-    alert('Request sent! We\'ll contact you on WhatsApp shortly.');
-    window.open(`https://wa.me/2349083204141?text=${message}`, '_blank');
+    const data = Object.fromEntries(formData.entries());
+
+    const msg = [
+      '✈️ *New Booking Request — BigCity Bookings*',
+      '',
+      `👤 *Name:* ${data.name || '—'}`,
+      `📱 *Phone:* ${data.phone || '—'}`,
+      `🛫 *From:* ${data.departure || '—'}`,
+      `🛬 *To:* ${data.destination || '—'}`,
+      `📅 *Travel Date:* ${data.travel_date || '—'}`,
+      `🔄 *Return Date:* ${data.return_date || 'One way'}`,
+      `👥 *Passengers:* ${data.passengers || '—'}`,
+      `💺 *Class:* ${data.class || '—'}`,
+      data.message ? `📝 *Note:* ${data.message}` : '',
+    ].filter(Boolean).join('\n');
+
+    const encoded = encodeURIComponent(msg);
+    const waUrl = `https://wa.me/2349083204141?text=${encoded}`;
+
+    // Submit to Formspree silently in background
     fetch(form.action, {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
-    }).catch(err => console.log(err));
+    }).catch(() => {});
+
+    // Immediately open WhatsApp
+    window.open(waUrl, '_blank');
     form.reset();
+
+    // Show inline success toast instead of alert
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.textContent = '✓ Sent! Opening WhatsApp…';
+    btn.style.background = '#25D366';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+    }, 4000);
   });
 }
 </script>
