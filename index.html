@@ -1329,7 +1329,7 @@ body.light .blog-card .blog-overlay {
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(10,15,44,0.98);
   backdrop-filter: blur(20px);
-  z-index: 99;
+  z-index: 600;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1356,17 +1356,20 @@ body.light .mobile-menu { background: rgba(245,240,232,0.98); }
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--fg);
-  width: 38px;
-  height: 38px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 101;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-theme-row {
@@ -1911,9 +1914,32 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
-if (hamburger) hamburger.addEventListener('click', openMenu);
-if (mobileClose) mobileClose.addEventListener('click', closeMenu);
-mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+if (hamburger) {
+  hamburger.addEventListener('click', openMenu);
+  hamburger.addEventListener('touchend', function(e) { e.preventDefault(); openMenu(); });
+}
+
+if (mobileClose) {
+  mobileClose.addEventListener('click', closeMenu);
+  mobileClose.addEventListener('touchend', function(e) { e.preventDefault(); closeMenu(); });
+}
+
+// Close when clicking nav links
+mobileLinks.forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+// Close when tapping the dark overlay background (but not menu content)
+if (mobileMenu) {
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target === mobileMenu) closeMenu();
+  });
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeMenu();
+});
 
 // Mobile theme toggle mirrors main toggle
 const themeToggleMobile = document.getElementById('themeToggleMobile');
