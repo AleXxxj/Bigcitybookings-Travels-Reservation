@@ -1279,7 +1279,9 @@ body.light .blog-card .blog-overlay {
 }
 
 @media (max-width: 768px) {
-  nav { display: none; }
+  nav > a, nav > button.theme-toggle { display: none; }
+  nav { justify-content: flex-end; }
+  .hamburger { display: flex !important; }
   .hero h1 { font-size: 2.75rem; }
   .hero-stats { position: relative; right: auto; bottom: auto; margin-top: 3rem; justify-content: flex-start; }
   .scroll-indicator { display: none; }
@@ -1288,7 +1290,6 @@ body.light .blog-card .blog-overlay {
   .blog-grid { grid-template-columns: 1fr; }
   .blog-card.featured { grid-column: span 1; }
   .footer-top { grid-template-columns: 1fr; }
-  .mobile-nav { display: flex; }
 }
 
 /* ── MOBILE NAV ── */
@@ -1379,11 +1380,8 @@ body.light .mobile-menu { background: rgba(245,240,232,0.98); }
   margin-top: 1rem;
 }
 
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
-  nav > a, nav > button.theme-toggle { display: none; }
-  nav { gap: 1rem; }
-}
+
+
 </style>
 </head>
 <body>
